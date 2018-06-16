@@ -1,6 +1,12 @@
+import * as R from 'ramda'
 import { connect } from 'react-redux'
 import { selectPuzzle, checkPuzzles } from '../actions'
-import Puzzle from '../components/Puzzle'
+import { getRounds } from '../selectors'
+import { Puzzle } from '../components'
+
+const mapStateToProps = R.applySpec({
+  rounds: getRounds,
+})
 
 const mapDispatchToProps = {
   selectPuzzle,
@@ -8,6 +14,6 @@ const mapDispatchToProps = {
 }
 
 export default connect(
-  undefined,
+  mapStateToProps,
   mapDispatchToProps,
 )(Puzzle)

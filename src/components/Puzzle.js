@@ -1,60 +1,56 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const CardContainer = styled.div`
-  width: 25%;
-  height: 260px;
+const PuzzleContainer = styled.div`
+  width: ${({ size }) => `${size}%`};
+  height: 6em;
   border: 1px solid #ccc;
-  margin: 40px 0;
-  perspective: 600px;
+  margin: 0.5em;
+  perspective: 20em;
 `
 
-const FullCard = styled.div`
+const FullPuzzle = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  cursor: pointer;
   transform-style: preserve-3d;
   transform-origin: center right;
   transition: transform 1s;
   transform: ${({ active }) => active && 'translateX(-100%) rotateY(-180deg)'};
+  cursor: pointer;
 `
 
-const SideCard = styled.div`
+const SidePuzzle = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  line-height: 260px;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
   backface-visibility: hidden;
   background: black;
 `
 
-const Back = SideCard.withComponent('div')
+const BackContainer = SidePuzzle.withComponent('div')
 
-const BackCard = Back.extend`
+const BackPuzzle = BackContainer.extend`
   background: ${({ color }) => color};
   transform: rotateY(180deg);
 `
 
-export default class Puzzle extends React.Component {
-  render() {
-    const { active, color, selectPuzzle, index, checkPuzzles } = this.props
-    return (
-      <CardContainer>
-        <FullCard
-          active={active}
-          onClick={() => {
-            checkPuzzles(index)
-          }}
-        >
-          <SideCard />
-          <BackCard color={color} />
-        </FullCard>
-      </CardContainer>
-    )
-  }
+const Puzzle = ({ active, color, index, checkPuzzles, rounds }) => {
+  const puzzleSize = !rounds ? 23 : rounds <= 3 ? 30 : 43
+
+  return (
+    <PuzzleContainer size={puzzleSize}>
+      <FullPuzzle
+        active={active}
+        onClick={() => {
+          checkPuzzles(index)
+        }}
+      >
+        <SidePuzzle />
+        <BackPuzzle color={color} />
+      </FullPuzzle>
+    </PuzzleContainer>
+  )
 }
+
+export default Puzzle
