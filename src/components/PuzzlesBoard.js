@@ -1,18 +1,18 @@
 import React from 'react'
-import PuzzleContainer from '../containers/PuzzleContainer'
 import styled from 'styled-components'
+import PuzzleContainer from '../containers/PuzzleContainer'
 
 const PuzzlesContainer = styled.div`
-  width: 60%;
-  height: 97%;
-  position: fixed;
-  top: -5%;
-  left: 20%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   align-content: center;
   overflow: auto;
+  width: 60%;
+  height: 100%;
+  position: fixed;
+  top: -5%;
+  left: 20%;
 `
 
 export default class PuzzlesBoard extends React.Component {

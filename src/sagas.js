@@ -1,13 +1,13 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import { getPuzzlesBoard } from '../selectors'
+import { getPuzzlesBoard } from './selectors'
 import {
   CHECK_PUZZLES,
   checkPuzzles,
   wrongStep,
   correctStep,
   selectPuzzle,
-} from '../actions'
+} from './actions'
 
 const checkPuzzlesWorker = function*({ payload }) {
   const currentPuzzlesBoard = yield select(getPuzzlesBoard)
@@ -35,4 +35,6 @@ const checkPuzzlesWatcher = function*() {
   yield takeEvery(CHECK_PUZZLES, checkPuzzlesWorker)
 }
 
-export default checkPuzzlesWatcher
+export default function*() {
+  yield call(checkPuzzlesWatcher)
+}

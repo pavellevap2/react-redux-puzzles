@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 const CardContainer = styled.div`
-  width: 25%;
-  height: 260px;
+  width: ${({ size }) => `${size}%`};
+  height: 80px;
   border: 1px solid #ccc;
-  margin: 40px 0;
-  perspective: 600px;
+  margin: 10px;
+  perspective: 300px;
 `
 
 const FullCard = styled.div`
@@ -24,7 +24,6 @@ const SideCard = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  line-height: 260px;
   color: white;
   text-align: center;
   font-weight: bold;
@@ -42,9 +41,19 @@ const BackCard = Back.extend`
 
 export default class Puzzle extends React.Component {
   render() {
-    const { active, color, selectPuzzle, index, checkPuzzles } = this.props
+    const {
+      active,
+      color,
+      selectPuzzle,
+      index,
+      checkPuzzles,
+      rounds,
+    } = this.props
+
+    const puzzleSize = !rounds ? 23 : rounds <= 3 ? 30 : 43
+    console.log(puzzleSize, rounds)
     return (
-      <CardContainer>
+      <CardContainer size={puzzleSize}>
         <FullCard
           active={active}
           onClick={() => {

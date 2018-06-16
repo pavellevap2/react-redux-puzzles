@@ -1,7 +1,7 @@
-import rootReducer from './reducers/puzzlesBoard'
-import { createStore, applyMiddleware } from 'redux'
+import rootReducer from './reducers'
 import createSagaMiddleware from 'redux-saga'
-import rootSaga from './sagas/RootSaga'
+import rootSaga from './sagas'
+import { createStore, applyMiddleware } from 'redux'
 
 export const sagaMiddleware = createSagaMiddleware()
 
