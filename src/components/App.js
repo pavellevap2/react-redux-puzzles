@@ -1,9 +1,6 @@
 import React from 'react'
+import PuzzleBoard from './PuzzlesBoard'
 
-const App = () => (
-  <React.Fragment>
-    <h1>App</h1>
-  </React.Fragment>
-)
+const App = () => <PuzzleBoard />
 
 export default App
