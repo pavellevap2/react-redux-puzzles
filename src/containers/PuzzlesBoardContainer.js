@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 import { connect } from 'react-redux'
 import { getPuzzlesBoard } from '../selectors'
-import { createPuzzlesBoard } from '../actions'
+import { createPuzzlesBoard, checkPuzzles } from '../actions'
 import PuzzlesBoard from '../components/PuzzlesBoard'
 
 const mapStateToProps = R.applySpec({

@@ -2,12 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 const CardContainer = styled.div`
-  width: 200px;
+  width: 25%;
   height: 260px;
   border: 1px solid #ccc;
   margin: 40px 0;
   perspective: 600px;
 `
+
 const FullCard = styled.div`
   position: relative;
   width: 100%;
@@ -16,8 +17,7 @@ const FullCard = styled.div`
   transform-style: preserve-3d;
   transform-origin: center right;
   transition: transform 1s;
-  transform: ${({ active }) =>
-    active ? 'translateX(-100%) rotateY(-180deg)' : null};
+  transform: ${({ active }) => active && 'translateX(-100%) rotateY(-180deg)'};
 `
 
 const SideCard = styled.div`
@@ -30,7 +30,7 @@ const SideCard = styled.div`
   font-weight: bold;
   font-size: 40px;
   backface-visibility: hidden;
-  background: red;
+  background: black;
 `
 
 const Back = SideCard.withComponent('div')
@@ -42,11 +42,15 @@ const BackCard = Back.extend`
 
 export default class Puzzle extends React.Component {
   render() {
-    const { active, color, selectPuzzle, index } = this.props
-    console.log(active)
+    const { active, color, selectPuzzle, index, checkPuzzles } = this.props
     return (
       <CardContainer>
-        <FullCard active={active} onClick={() => selectPuzzle(index)}>
+        <FullCard
+          active={active}
+          onClick={() => {
+            checkPuzzles(index)
+          }}
+        >
           <SideCard />
           <BackCard color={color} />
         </FullCard>

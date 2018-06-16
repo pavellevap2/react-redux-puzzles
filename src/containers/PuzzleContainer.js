@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
-import { selectPuzzle } from '../actions'
+import { selectPuzzle, checkPuzzles } from '../actions'
 import Puzzle from '../components/Puzzle'
 
 const mapDispatchToProps = {
   selectPuzzle,
+  checkPuzzles,
 }
 
 export default connect(

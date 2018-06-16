@@ -3,9 +3,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import App from './components/App'
 import { createStore } from 'redux'
-import puzzlesBoard from './reducers/puzzlesBoard'
-
-const store = createStore(puzzlesBoard)
+import store from './configureStore'
 
 ReactDOM.render(
   <Provider store={store}>
