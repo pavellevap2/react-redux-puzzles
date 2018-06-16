@@ -1,6 +1,7 @@
 import React from 'react'
-import PuzzleBoard from './PuzzlesBoard'
+import PuzzlesBoardContainer from '../containers/PuzzlesBoardContainer'
+// import  from '../containers'
 
-const App = () => <PuzzleBoard />
+const App = () => <PuzzlesBoardContainer />
 
 export default App

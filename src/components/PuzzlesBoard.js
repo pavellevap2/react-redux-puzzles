@@ -1,15 +1,18 @@
 import React from 'react'
-import Puzzle from './Puzzle'
-
-const STRUCTURE = Array(17)
-  .fill(null)
-  .map((_, i) => i)
+import PuzzleContainer from '../containers/PuzzleContainer'
 
 export default class PuzzlesBoard extends React.Component {
+  componentDidMount() {
+    this.props.createPuzzlesBoard()
+  }
   render() {
+    const { puzzlesBoard } = this.props
+
     return (
       <React.Fragment>
-        {STRUCTURE.map(x => <Puzzle number={x} key={x} />)}
+        {puzzlesBoard.map(({ color, active }, i) => (
+          <PuzzleContainer color={color} active={active} key={i} index={i} />
+        ))}
       </React.Fragment>
     )
   }

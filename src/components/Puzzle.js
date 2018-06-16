@@ -36,34 +36,19 @@ const SideCard = styled.div`
 const Back = SideCard.withComponent('div')
 
 const BackCard = Back.extend`
-  background: blue;
+  background: ${({ color }) => color};
   transform: rotateY(180deg);
 `
 
 export default class Puzzle extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      active: false,
-    }
-  }
-
-  selectPuzzle = () => {
-    const { active } = this.state
-    this.setState({
-      active: !active,
-    })
-  }
-
   render() {
-    const { number } = this.props
-    const { active } = this.state
-
+    const { active, color, selectPuzzle, index } = this.props
+    console.log(active)
     return (
       <CardContainer>
-        <FullCard active={active} onClick={this.selectPuzzle}>
-          <SideCard>{number}</SideCard>
-          <BackCard>{number} </BackCard>
+        <FullCard active={active} onClick={() => selectPuzzle(index)}>
+          <SideCard />
+          <BackCard color={color} />
         </FullCard>
       </CardContainer>
     )
