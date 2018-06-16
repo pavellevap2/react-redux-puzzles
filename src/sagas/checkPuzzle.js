@@ -12,21 +12,23 @@ import {
 const checkPuzzlesWorker = function*({ payload }) {
   const currentPuzzlesBoard = yield select(getPuzzlesBoard)
   const currentSelectedPuzzles = currentPuzzlesBoard.filter(x => x.active)
-  if (currentSelectedPuzzles.length <= 1) {
+
+  if (currentSelectedPuzzles.length < 2) {
     yield put(selectPuzzle(payload))
   }
 
   const puzzlesBoard = yield select(getPuzzlesBoard)
   const selectedPuzzles = puzzlesBoard.filter(x => x.active)
+  const firstPuzzle = selectedPuzzles[0]
+  const secondPuzzle = selectedPuzzles[1]
   yield delay(1500)
 
-  if (
-    selectedPuzzles.length == 2 &&
-    selectedPuzzles[0] === selectedPuzzles[1]
-  ) {
-    yield put(correctStep())
+  if (selectedPuzzles.length == 2) {
+    if (firstPuzzle.color === secondPuzzle.color) {
+      yield put(correctStep())
+    }
+    yield put(wrongStep())
   }
-  yield put(wrongStep())
 }
 
 const checkPuzzlesWatcher = function*() {
