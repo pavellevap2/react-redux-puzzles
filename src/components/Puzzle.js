@@ -1,69 +1,56 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const CardContainer = styled.div`
+const PuzzleContainer = styled.div`
   width: ${({ size }) => `${size}%`};
-  height: 80px;
+  height: 6em;
   border: 1px solid #ccc;
-  margin: 10px;
-  perspective: 300px;
+  margin: 0.5em;
+  perspective: 20em;
 `
 
-const FullCard = styled.div`
+const FullPuzzle = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  cursor: pointer;
   transform-style: preserve-3d;
   transform-origin: center right;
   transition: transform 1s;
   transform: ${({ active }) => active && 'translateX(-100%) rotateY(-180deg)'};
+  cursor: pointer;
 `
 
-const SideCard = styled.div`
+const SidePuzzle = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
   backface-visibility: hidden;
   background: black;
 `
 
-const Back = SideCard.withComponent('div')
+const BackContainer = SidePuzzle.withComponent('div')
 
-const BackCard = Back.extend`
+const BackPuzzle = BackContainer.extend`
   background: ${({ color }) => color};
   transform: rotateY(180deg);
 `
 
-export default class Puzzle extends React.Component {
-  render() {
-    const {
-      active,
-      color,
-      selectPuzzle,
-      index,
-      checkPuzzles,
-      rounds,
-    } = this.props
+const Puzzle = ({ active, color, index, checkPuzzles, rounds }) => {
+  const puzzleSize = !rounds ? 23 : rounds <= 3 ? 30 : 43
 
-    const puzzleSize = !rounds ? 23 : rounds <= 3 ? 30 : 43
-    console.log(puzzleSize, rounds)
-    return (
-      <CardContainer size={puzzleSize}>
-        <FullCard
-          active={active}
-          onClick={() => {
-            checkPuzzles(index)
-          }}
-        >
-          <SideCard />
-          <BackCard color={color} />
-        </FullCard>
-      </CardContainer>
-    )
-  }
+  return (
+    <PuzzleContainer size={puzzleSize}>
+      <FullPuzzle
+        active={active}
+        onClick={() => {
+          checkPuzzles(index)
+        }}
+      >
+        <SidePuzzle />
+        <BackPuzzle color={color} />
+      </FullPuzzle>
+    </PuzzleContainer>
+  )
 }
+
+export default Puzzle

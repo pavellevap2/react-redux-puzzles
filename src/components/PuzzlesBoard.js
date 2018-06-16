@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import PuzzleContainer from '../containers/PuzzleContainer'
 
 const PuzzlesContainer = styled.div`
+  position: fixed;
+  top: -5%;
+  left: 20%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -10,25 +13,14 @@ const PuzzlesContainer = styled.div`
   overflow: auto;
   width: 60%;
   height: 100%;
-  position: fixed;
-  top: -5%;
-  left: 20%;
 `
 
-export default class PuzzlesBoard extends React.Component {
-  componentDidMount() {
-    this.props.createPuzzlesBoard()
-  }
+const PuzzlesBoard = ({ puzzlesBoard }) => (
+  <PuzzlesContainer>
+    {puzzlesBoard.map(({ color, active }, i) => (
+      <PuzzleContainer color={color} active={active} key={i} index={i} />
+    ))}
+  </PuzzlesContainer>
+)
 
-  render() {
-    const { puzzlesBoard } = this.props
-
-    return (
-      <PuzzlesContainer>
-        {puzzlesBoard.map(({ color, active }, i) => (
-          <PuzzleContainer color={color} active={active} key={i} index={i} />
-        ))}
-      </PuzzlesContainer>
-    )
-  }
-}
+export default PuzzlesBoard

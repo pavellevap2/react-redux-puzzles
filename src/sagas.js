@@ -1,13 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import { getPuzzlesBoard } from './selectors'
-import {
-  CHECK_PUZZLES,
-  checkPuzzles,
-  wrongStep,
-  correctStep,
-  selectPuzzle,
-} from './actions'
+import { CHECK_PUZZLES, wrongStep, rightStep, selectPuzzle } from './actions'
 
 const checkPuzzlesWorker = function*({ payload }) {
   const currentPuzzlesBoard = yield select(getPuzzlesBoard)
@@ -23,9 +17,9 @@ const checkPuzzlesWorker = function*({ payload }) {
   const secondPuzzle = selectedPuzzles[1]
   yield delay(1500)
 
-  if (selectedPuzzles.length == 2) {
+  if (selectedPuzzles.length === 2) {
     if (firstPuzzle.color === secondPuzzle.color) {
-      yield put(correctStep())
+      yield put(rightStep())
     }
     yield put(wrongStep())
   }
