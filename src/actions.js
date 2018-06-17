@@ -6,18 +6,18 @@ const DOMAIN = 'puzzles/'
 
 export const SELECT_PUZZLE = `${DOMAIN}SELECT_PUZZLE`
 
-export const CHECK_PUZZLES = `${DOMAIN}CHECK_PUZZLES`
+export const MAKE_PUZZLE_ACTIVE = `${DOMAIN}MAKE_PUZZLE_ACTIVE`
 
-export const WRONG_STEP = `${DOMAIN}WRONG_STEP`
+export const MAKE_WRONG_STEP = `${DOMAIN}MAKE_WRONG_STEP`
 
-export const RIGHT_STEP = `${DOMAIN}CORRECT_STEP`
+export const MAKE_RIGHT_STEP = `${DOMAIN}MAKE_RIGHT_STEP`
 
 // Action Creators
 
 export const selectPuzzle = createAction(SELECT_PUZZLE)
 
-export const checkPuzzles = createAction(CHECK_PUZZLES)
+export const makePuzzleActive = createAction(MAKE_PUZZLE_ACTIVE)
 
-export const wrongStep = createAction(WRONG_STEP)
+export const makeWrongStep = createAction(MAKE_WRONG_STEP)
 
-export const rightStep = createAction(RIGHT_STEP)
+export const makeRightStep = createAction(MAKE_RIGHT_STEP)

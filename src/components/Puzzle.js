@@ -35,7 +35,7 @@ const BackPuzzle = BackContainer.extend`
   transform: rotateY(180deg);
 `
 
-const Puzzle = ({ active, color, index, checkPuzzles, rounds }) => {
+const Puzzle = ({ active, color, index, selectPuzzle, rounds }) => {
   const puzzleSize = !rounds ? 23 : rounds <= 3 ? 30 : 43
 
   return (
@@ -43,7 +43,7 @@ const Puzzle = ({ active, color, index, checkPuzzles, rounds }) => {
       <FullPuzzle
         active={active}
         onClick={() => {
-          checkPuzzles(index)
+          selectPuzzle(index)
         }}
       >
         <SidePuzzle />

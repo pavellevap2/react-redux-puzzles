@@ -1,14 +1,19 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import { getPuzzlesBoard } from './selectors'
-import { CHECK_PUZZLES, wrongStep, rightStep, selectPuzzle } from './actions'
+import {
+  makeWrongStep,
+  makeRightStep,
+  makePuzzleActive,
+  SELECT_PUZZLE,
+} from './actions'
 
 const checkPuzzlesWorker = function*({ payload }) {
   const currentPuzzlesBoard = yield select(getPuzzlesBoard)
   const currentSelectedPuzzles = currentPuzzlesBoard.filter(x => x.active)
 
   if (currentSelectedPuzzles.length < 2) {
-    yield put(selectPuzzle(payload))
+    yield put(makePuzzleActive(payload))
   }
 
   const puzzlesBoard = yield select(getPuzzlesBoard)
@@ -19,14 +24,14 @@ const checkPuzzlesWorker = function*({ payload }) {
 
   if (selectedPuzzles.length === 2) {
     if (firstPuzzle.color === secondPuzzle.color) {
-      yield put(rightStep())
+      yield put(makeRightStep())
     }
-    yield put(wrongStep())
+    yield put(makeWrongStep())
   }
 }
 
 const checkPuzzlesWatcher = function*() {
-  yield takeEvery(CHECK_PUZZLES, checkPuzzlesWorker)
+  yield takeEvery(SELECT_PUZZLE, checkPuzzlesWorker)
 }
 
 export default function*() {

@@ -1,22 +1,22 @@
 import { handleActions, handleAction } from 'redux-actions'
 import { combineReducers } from 'redux'
-import { SELECT_PUZZLE, WRONG_STEP, RIGHT_STEP } from './actions'
+import { MAKE_RIGHT_STEP, MAKE_PUZZLE_ACTIVE, MAKE_WRONG_STEP } from './actions'
 import mixedColors from './helpers'
 
 const puzzlesBoard = handleActions(
   {
-    [SELECT_PUZZLE]: (state, { payload }) =>
+    [MAKE_PUZZLE_ACTIVE]: (state, { payload }) =>
       state.map(
         (x, i) => (i === payload ? { ...x, active: !x.active } : { ...x }),
       ),
 
-    [WRONG_STEP]: state => state.map(x => ({ ...x, active: false })),
+    [MAKE_WRONG_STEP]: state => state.map(x => ({ ...x, active: false })),
 
-    [RIGHT_STEP]: state => state.filter(x => !x.active),
+    [MAKE_RIGHT_STEP]: state => state.filter(x => !x.active),
   },
   mixedColors,
 )
 
-const rounds = handleAction(RIGHT_STEP, state => state + 1, 0)
+const rounds = handleAction(MAKE_RIGHT_STEP, state => state + 1, 0)
 
 export default combineReducers({ puzzlesBoard, rounds })
